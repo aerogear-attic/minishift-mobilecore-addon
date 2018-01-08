@@ -3,6 +3,11 @@
 ## Set up
 If you have not yet, [Install minishift](https://docs.openshift.org/latest/minishift/getting-started/installing.html).
 
+Enable minishift experimental addons:
+```sh
+export MINISHIFT_ENABLE_EXPERIMENTAL=y
+```
+
 After Cloning this repo it will need to be added to the minishift addons catalog, this cannot be done from inside the directory, add it like so:
 ```sh
 cd ..
