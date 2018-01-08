@@ -4,6 +4,7 @@
 # OpenShift-Version: >=3.7.0
 
 ssh tce-load -wi bash.tcz
+ssh tce-load -wi coreutils.tcz
 
 ssh wget https://nodejs.org/dist/latest/#{VER} -O ~/#{VER}
 ssh cd /usr/local && sudo /usr/local/bin/tar --strip-components=1 -xzf ~/#{VER}
@@ -23,14 +24,10 @@ ssh git clone https://github.com/aerogear/mobile-core.git
 ssh bash ~/mobile-core/installer/roles/ansible-service-broker-setup/files/provision-ansible-service-broker.sh '#{DOCKERHUB_USERNAME}' '#{DOCKERHUB_PASSWORD}' '#{DOCKERHUB_ORG}' true latest nip.io 
 
 ssh cp -r ~/mobile-core/ui/* /var/lib/minishift/openshift.local.config
+echo Installing and starting MCP extension, this can take a while
+echo
 ssh bash /var/lib/minishift/openshift.local.config/install.sh
-
-echo Starting MCP extension, this can take a while
-echo
 ssh cd /var/lib/minishift/openshift.local.config/ && npm run grunt build
-
-echo MCP started, restarting origin container
-echo
 docker restart origin
 
 echo mobile core successfully enabled
