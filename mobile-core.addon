@@ -1,0 +1,37 @@
+# Name: mobilecore                                                                          
+# Description: Allows authenticated users to run images under a non pre-allocated UID   
+# Var-Defaults: DOCKERHUB_USERNAME=USERNAME,DOCKERHUB_PASSWORD=PASSWORD,DOCKERHUB_ORG=aerogearcatalog, VER=node-v9.3.0-linux-x64.tar.gz
+# OpenShift-Version: >=3.7.0
+
+ssh tce-load -wi bash.tcz
+
+ssh wget https://nodejs.org/dist/latest/#{VER} -O ~/#{VER}
+ssh cd /usr/local && sudo /usr/local/bin/tar --strip-components=1 -xzf ~/#{VER}
+
+ssh sudo chmod -R a+rwx /var/lib/minishift/openshift.local.config
+ssh wget https://github.com/openshift/origin/releases/download/v3.7.0/openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit.tar.gz
+ssh tar -xf openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit.tar.gz && sudo cp openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit/oc /usr/bin/oc
+ssh mkdir ~/.kube
+ssh cp /var/lib/minishift/openshift.local.config/master/admin.kubeconfig ~/.kube/config
+ssh oc login -u system:admin
+
+oc login -u system:admin
+oc adm policy add-cluster-role-to-group system:openshift:templateservicebroker-client system:unauthenticated system:authenticated
+
+ssh git clone https://github.com/aerogear/mobile-core.git
+
+ssh bash ~/mobile-core/installer/roles/ansible-service-broker-setup/files/provision-ansible-service-broker.sh '#{DOCKERHUB_USERNAME}' '#{DOCKERHUB_PASSWORD}' '#{DOCKERHUB_ORG}' true latest nip.io 
+
+ssh cp -r ~/mobile-core/ui/* /var/lib/minishift/openshift.local.config
+ssh bash /var/lib/minishift/openshift.local.config/install.sh
+
+echo Starting MCP extension, this can take a while
+echo
+ssh cd /var/lib/minishift/openshift.local.config/ && npm run grunt build
+
+echo MCP started, restarting origin container
+echo
+docker restart origin
+
+echo mobile core successfully enabled
+echo
