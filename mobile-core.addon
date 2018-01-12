@@ -1,12 +1,12 @@
 # Name: mobilecore                                                                          
 # Description: Allows authenticated users to run images under a non pre-allocated UID   
-# Var-Defaults: DOCKERHUB_USERNAME=USERNAME,DOCKERHUB_PASSWORD=PASSWORD,DOCKERHUB_ORG=aerogearcatalog, VER=node-v9.3.0-linux-x64.tar.gz
+# Var-Defaults: DOCKERHUB_USERNAME=USERNAME,DOCKERHUB_PASSWORD=PASSWORD,DOCKERHUB_ORG=aerogearcatalog, VER=v9.3.0
 # OpenShift-Version: >=3.7.0
 
 ssh tce-load -wi bash.tcz
 ssh tce-load -wi coreutils.tcz
 
-ssh wget https://nodejs.org/dist/latest/#{VER} -O ~/#{VER}
+ssh wget https://nodejs.org/dist/#{VER}/node-#{VER}-linux-x64.tar.gz -O ~/#{VER}
 ssh cd /usr/local && sudo /usr/local/bin/tar --strip-components=1 -xzf ~/#{VER}
 
 ssh sudo chmod -R a+rwx /var/lib/minishift/openshift.local.config
