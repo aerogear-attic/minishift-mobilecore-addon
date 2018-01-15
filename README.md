@@ -1,7 +1,7 @@
-#Minishift Mobile Core addon
+# Minishift Mobile Core Add-on
 
 ## Set up
-[Install minishift](https://docs.openshift.org/latest/minishift/getting-started/installing.html).
+[Install minishift](https://docs.openshift.org/latest/minishift/getting-started/installing.html)  
 [Install OC](https://docs.openshift.org/latest/cli_reference/get_started_cli.html#installing-the-cli)
 
 Enable minishift experimental addons:
