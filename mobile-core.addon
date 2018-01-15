@@ -6,11 +6,11 @@
 ssh tce-load -wi bash.tcz
 ssh tce-load -wi coreutils.tcz
 
-ssh wget https://nodejs.org/dist/#{VER}/node-#{VER}-linux-x64.tar.gz -O ~/#{VER}
-ssh cd /usr/local && sudo /usr/local/bin/tar --strip-components=1 -xzf ~/#{VER}
+ssh curl -s https://nodejs.org/dist/#{VER}/node-#{VER}-linux-x64.tar.gz > ~/#{VER}.tar.gz
+ssh cd /usr/local && sudo /usr/local/bin/tar --strip-components=1 -xzf ~/#{VER}.tar.gz
 
 ssh sudo chmod -R a+rwx /var/lib/minishift/openshift.local.config
-ssh wget https://github.com/openshift/origin/releases/download/v3.7.0/openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit.tar.gz
+ssh curl -s -O -J -L https://github.com/openshift/origin/releases/download/v3.7.0/openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit.tar.gz
 ssh tar -xf openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit.tar.gz && sudo cp openshift-origin-client-tools-v3.7.0-7ed6862-linux-64bit/oc /usr/bin/oc
 ssh mkdir ~/.kube
 ssh cp /var/lib/minishift/openshift.local.config/master/admin.kubeconfig ~/.kube/config
