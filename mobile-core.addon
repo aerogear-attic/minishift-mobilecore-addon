@@ -19,10 +19,6 @@ ssh oc login -u system:admin
 oc login -u system:admin
 oc adm policy add-cluster-role-to-group system:openshift:templateservicebroker-client system:unauthenticated system:authenticated
 
-ssh git clone https://github.com/aerogear/mobile-core.git
-
-ssh bash ~/mobile-core/installer/roles/ansible-service-broker-setup/files/provision-ansible-service-broker.sh '#{DOCKERHUB_USERNAME}' '#{DOCKERHUB_PASSWORD}' '#{DOCKERHUB_ORG}' true latest nip.io 
-
 oc create -f https://raw.githubusercontent.com/aerogear/mobile-cli/master/artifacts/mobileclient_crd.yaml
 
 ssh oc get clusterrole admin -o yaml > /tmp/admin-clusterrole.yml
@@ -33,12 +29,22 @@ ssh oc get clusterrole edit -o yaml > /tmp/edit-clusterrole.yml
 ssh printf "- apiGroups:\n  - mobile.k8s.io\n  attributeRestrictions: null\n  resources:\n  - mobileclients\n  verbs:\n  - create\n  - delete\n  - get\n  - list\n  - patch\n  - update\n  - watch\n" >> /tmp/edit-clusterrole.yml
 ssh oc replace -f /tmp/edit-clusterrole.yml
 
+ssh git clone https://github.com/aerogear/mobile-core.git
 ssh cp -r ~/mobile-core/ui/* /var/lib/minishift/openshift.local.config
 echo Installing and starting MCP extension, this can take a while
 echo
 ssh bash /var/lib/minishift/openshift.local.config/install.sh
 ssh cd /var/lib/minishift/openshift.local.config/ && npm run grunt build
 docker restart origin
+
+echo Waiting for Origin to start...
+ssh while [ $(yes | oc login -u system:admin | wc -l) -eq 0 ]; do sleep 2; done
+
+echo Installing Ansible Service Broker
+ssh bash ~/mobile-core/installer/roles/ansible-service-broker-setup/files/provision-ansible-service-broker.sh '#{DOCKERHUB_USERNAME}' '#{DOCKERHUB_PASSWORD}' '#{DOCKERHUB_ORG}' true latest nip.io 
+
+echo Waiting for Ansible Service Broker to start...
+ssh while [ $(oc get pods -n ansible-service-broker | grep "asb-" | grep -v "deploy" | grep "Running" | wc -l) -eq 0 ]; do sleep 10; done
 
 echo mobile core successfully enabled
 echo
