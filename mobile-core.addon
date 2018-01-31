@@ -39,7 +39,7 @@ docker restart origin
 ssh while [ $(yes | oc login -u system:admin | wc -l) -eq 0 ]; do sleep 2; done
 
 echo Installing Ansible Service Broker
-ssh bash ~/mobile-core/installer/roles/ansible-service-broker-setup/files/provision-ansible-service-broker.sh '#{DOCKERHUB_USERNAME}' '#{DOCKERHUB_PASSWORD}' '#{DOCKERHUB_ORG}' true latest nip.io ansible-service-broker
+ssh bash ~/mobile-core/installer/roles/ansible-service-broker-setup/files/provision-ansible-service-broker.sh '#{DOCKERHUB_USERNAME}' '#{DOCKERHUB_PASSWORD}' '#{DOCKERHUB_ORG}' true latest #{ip} nip.io ansible-service-broker
 ssh while [ $(oc get pods -n ansible-service-broker | grep "asb-" | grep -v "deploy" | grep "Running" | wc -l) -eq 0 ]; do sleep 10; done
 
 echo mobile core successfully enabled
