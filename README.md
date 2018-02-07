@@ -20,7 +20,7 @@ A few config values are required for this addon to function, as follows:
 ```
 export DOCKERHUB_USERNAME=<docker hub username>
 export DOCKERHUB_PASSWORD=<docker hub password>
-export DOCKERHUB_ORG=<docker hub org, use 'aerogearcatalog' if you do not have your own>
+export DOCKERHUB_ORG=<docker hub org, defaults to 'aerogearcatalog' if left unset>
 minishift config set addon-env DOCKERHUB_USERNAME=${DOCKERHUB_USERNAME},DOCKERHUB_PASSWORD="${DOCKERHUB_PASSWORD}",DOCKERHUB_ORG=${DOCKERHUB_ORG}
 ```
 
