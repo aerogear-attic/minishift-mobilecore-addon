@@ -18,8 +18,8 @@ export MINISHIFT_ENABLE_EXPERIMENTAL=y
 After Cloning this repo it will need to be added to the minishift addons catalog, this cannot be done from inside the directory, add it like so:
 ```
 cd ..
-minishift addon install -f minishift-mobilecore-addon/
-minishift addons enable mobilecore
+minishift addons install -f minishift-mobilecore-addon/
+minishift addons enable minishift-mobilecore-addon
 ```
 
 A few config values are required for this addon to function, as follows:
@@ -51,7 +51,7 @@ minishift start --openshift-version 3.7.0 --service-catalog
 
 If you did not enable the addon, you will need to apply it manually:
 ```
-minishift addons apply mobilecore
+minishift addons apply minishift-mobilecore-addon
 ```
 
 ## Troubleshooting
@@ -116,7 +116,7 @@ This can be caused if you have tried to execute `minishift delete` before execut
 ```
 sudo rm -rf ~/.minishift
 minishift addons install -f /path/to/minishift-mobilecore-addon
-minishift addons enable mobilecore
+minishift addons enable minishift-mobilecore-addon
 ```
 
 ### When All Else Fails
