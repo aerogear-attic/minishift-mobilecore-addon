@@ -4,6 +4,12 @@
 [Install minishift](https://docs.openshift.org/latest/minishift/getting-started/installing.html)  
 [Install OC](https://docs.openshift.org/latest/cli_reference/get_started_cli.html#installing-the-cli)
 
+MiniShift needs to be at least 1.11.0, check it using the following command:
+```
+$ minishift version
+minishift v1.11.0+4459917
+```
+
 Enable minishift experimental addons:
 ```
 export MINISHIFT_ENABLE_EXPERIMENTAL=y
@@ -12,8 +18,8 @@ export MINISHIFT_ENABLE_EXPERIMENTAL=y
 After Cloning this repo it will need to be added to the minishift addons catalog, this cannot be done from inside the directory, add it like so:
 ```
 cd ..
-minishift addon install -f minishift-mobilecore-addon/
-minishift addons enable mobilecore
+minishift addons install -f minishift-mobilecore-addon/
+minishift addons enable minishift-mobilecore-addon
 ```
 
 A few config values are required for this addon to function, as follows:
@@ -22,13 +28,6 @@ export DOCKERHUB_USERNAME=<docker hub username>
 export DOCKERHUB_PASSWORD=<docker hub password>
 export DOCKERHUB_ORG=<docker hub org, defaults to 'aerogearcatalog' if left unset>
 minishift config set addon-env DOCKERHUB_USERNAME=${DOCKERHUB_USERNAME},DOCKERHUB_PASSWORD="${DOCKERHUB_PASSWORD}",DOCKERHUB_ORG=${DOCKERHUB_ORG}
-```
-
-## Check MiniShift version
-MiniShift needs to be at least 1.11.0, check it using the following command:
-```
-$ minishift version
-minishift v1.11.0+4459917
 ```
 
 ## Configure MiniShift
@@ -52,7 +51,7 @@ minishift start --openshift-version 3.7.0 --service-catalog
 
 If you did not enable the addon, you will need to apply it manually:
 ```
-minishift addons apply mobilecore
+minishift addons apply minishift-mobilecore-addon
 ```
 
 ## Troubleshooting
@@ -117,7 +116,7 @@ This can be caused if you have tried to execute `minishift delete` before execut
 ```
 sudo rm -rf ~/.minishift
 minishift addons install -f /path/to/minishift-mobilecore-addon
-minishift addons enable mobilecore
+minishift addons enable minishift-mobilecore-addon
 ```
 
 ### When All Else Fails
