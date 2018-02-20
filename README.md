@@ -4,6 +4,12 @@
 [Install minishift](https://docs.openshift.org/latest/minishift/getting-started/installing.html)  
 [Install OC](https://docs.openshift.org/latest/cli_reference/get_started_cli.html#installing-the-cli)
 
+MiniShift needs to be at least 1.11.0, check it using the following command:
+```
+$ minishift version
+minishift v1.11.0+4459917
+```
+
 Enable minishift experimental addons:
 ```
 export MINISHIFT_ENABLE_EXPERIMENTAL=y
@@ -22,13 +28,6 @@ export DOCKERHUB_USERNAME=<docker hub username>
 export DOCKERHUB_PASSWORD=<docker hub password>
 export DOCKERHUB_ORG=<docker hub org, defaults to 'aerogearcatalog' if left unset>
 minishift config set addon-env DOCKERHUB_USERNAME=${DOCKERHUB_USERNAME},DOCKERHUB_PASSWORD="${DOCKERHUB_PASSWORD}",DOCKERHUB_ORG=${DOCKERHUB_ORG}
-```
-
-## Check MiniShift version
-MiniShift needs to be at least 1.11.0, check it using the following command:
-```
-$ minishift version
-minishift v1.11.0+4459917
 ```
 
 ## Configure MiniShift
