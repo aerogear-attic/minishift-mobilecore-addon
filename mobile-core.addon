@@ -31,7 +31,7 @@ ssh oc replace -f /tmp/edit-clusterrole.yml
 
 ssh git clone https://github.com/#{CORE_REPO}/mobile-core.git
 ssh cd ~/mobile-core && git checkout #{CORE_BRANCH}
-ssh cp -r ~/mobile-core/ui/* /var/lib/minishift/openshift.local.configI'
+ssh cp -r ~/mobile-core/ui/* /var/lib/minishift/openshift.local.config
 echo Installing and starting MCP extension, this can take a while
 echo
 ssh bash /var/lib/minishift/openshift.local.config/install.sh
