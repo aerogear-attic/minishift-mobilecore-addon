@@ -26,9 +26,14 @@ A few config values are required for this addon to function, as follows:
 ```
 export DOCKERHUB_USERNAME=<docker hub username>
 export DOCKERHUB_PASSWORD=<docker hub password>
-export DOCKERHUB_ORG=<docker hub org, defaults to 'aerogearcatalog' if left unset>
-minishift config set addon-env DOCKERHUB_USERNAME=${DOCKERHUB_USERNAME},DOCKERHUB_PASSWORD="${DOCKERHUB_PASSWORD}",DOCKERHUB_ORG=${DOCKERHUB_ORG}
+minishift config set addon-env DOCKERHUB_USERNAME=${DOCKERHUB_USERNAME},DOCKERHUB_PASSWORD="${DOCKERHUB_PASSWORD}"
 ```
+
+### Custom Values
+You may also want to change some other values for this addon, which are all added to the above addon-env CSV in the same way, simply append them to the end of the list. Here are the options:
+- DOCKERHUB_ORG: defaults to 'aerogearcatalog', this is where the ASB looks for APBs.
+- CORE_REPO: defaults to 'aerogear', this is the mobile-core repo to install (i.e. https://github.com/CORE_REPO/mobile-core.git).
+- CORE_BRANCH defaults to 'master' this is the branch in the the CORE_REPO to install.
 
 ## Configure MiniShift
 Although the default MiniShift will function just fine, for the best results, it is best to configure MiniShift to start with extra CPUs and RAM, this can be done with the following commands:

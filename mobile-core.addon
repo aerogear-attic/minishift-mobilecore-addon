@@ -1,6 +1,6 @@
 # Name: minishift-mobilecore-addon                                                                          
 # Description: Allows authenticated users to run images under a non pre-allocated UID   
-# Var-Defaults: DOCKERHUB_USERNAME=USERNAME,DOCKERHUB_PASSWORD=PASSWORD,DOCKERHUB_ORG=aerogearcatalog, VER=v9.3.0
+# Var-Defaults: DOCKERHUB_USERNAME=USERNAME,DOCKERHUB_PASSWORD=PASSWORD,DOCKERHUB_ORG=aerogearcatalog, VER=v9.3.0,CORE_REPO=aerogear,CORE_BRANCH=master
 # OpenShift-Version: >=3.7.0
 
 ssh tce-load -wi bash.tcz
@@ -29,8 +29,9 @@ ssh oc get clusterrole edit -o yaml > /tmp/edit-clusterrole.yml
 ssh printf "- apiGroups:\n  - mobile.k8s.io\n  attributeRestrictions: null\n  resources:\n  - mobileclients\n  verbs:\n  - create\n  - delete\n  - get\n  - list\n  - patch\n  - update\n  - watch\n" >> /tmp/edit-clusterrole.yml
 ssh oc replace -f /tmp/edit-clusterrole.yml
 
-ssh git clone https://github.com/aerogear/mobile-core.git
-ssh cp -r ~/mobile-core/ui/* /var/lib/minishift/openshift.local.config
+ssh git clone https://github.com/#{CORE_REPO}/mobile-core.git
+ssh cd ~/mobile-core && git checkout #{CORE_BRANCH}
+ssh cp -r ~/mobile-core/ui/* /var/lib/minishift/openshift.local.configI'
 echo Installing and starting MCP extension, this can take a while
 echo
 ssh bash /var/lib/minishift/openshift.local.config/install.sh
