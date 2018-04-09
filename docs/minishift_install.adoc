@@ -60,7 +60,7 @@ Other options include:
 +
 * DOCKERHUB_ORG: defaults to 'aerogearcatalog', specifies where to search for service catalog items.
 * CORE_REPO: defaults to 'aerogear', specifies the organziation or user in github to install the mobile-core component, that is, https://github.com/<CORE_REPO>/mobile-core.git.
-+- CORE_BRANCH defaults to 'master', specifies the branch in the the CORE_REPO to install.
+* CORE_BRANCH defaults to 'master', specifies the branch in the the CORE_REPO to install.
 
 . Configure Minishift resources
 +
