@@ -1,6 +1,6 @@
 # Name: minishift-mobilecore-addon                                                                          
 # Description: Allows authenticated users to run images under a non pre-allocated UID   
-# Var-Defaults: DOCKERHUB_USERNAME=USERNAME,DOCKERHUB_PASSWORD=PASSWORD,DOCKERHUB_ORG=aerogearcatalog, VER=v9.3.0,CORE_REPO=aerogear,CORE_BRANCH=master
+# Var-Defaults: DOCKERHUB_USERNAME=USERNAME,DOCKERHUB_PASSWORD=PASSWORD,DOCKERHUB_ORG=aerogearcatalog, VER=v9.8.0,CORE_REPO=aerogear,CORE_BRANCH=master
 # OpenShift-Version: >=3.7.0
 
 ssh tce-load -wi bash.tcz
