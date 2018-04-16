@@ -19,7 +19,7 @@ ssh oc login -u system:admin
 oc login -u system:admin
 oc adm policy add-cluster-role-to-group system:openshift:templateservicebroker-client system:unauthenticated system:authenticated
 
-oc create -f https://raw.githubusercontent.com/aerogear/mobile-cli/master/artifacts/mobileclient_crd.yaml
+oc create -f https://raw.githubusercontent.com/#{CORE_REPO}/mobile-core/#{CORE_BRANCH}/installer/roles/create-mobile-client-crd/files/mobile-client-crd.yaml
 
 oc create clusterrole mobileclient-admin --verb=create,delete,get,list,update,watch --resource=mobileclients
 oc adm policy add-cluster-role-to-group mobileclient-admin system:authenticated
