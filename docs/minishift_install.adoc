@@ -84,7 +84,7 @@ minishift delete
 +
 [source,bash]
 ----
-minishift start --openshift-version 3.9.0 --service-catalog
+minishift start --openshift-version v3.9.0 --service-catalog
 ----
 +
 If you did not enable the addon, you need to apply it manually:
@@ -125,7 +125,7 @@ mobile core successfully enabled
 ----
 minishift stop
 minishift delete
-minishift start --openshift-version 3.9.0 --service-catalog
+minishift start --openshift-version v3.9.0 --service-catalog
 ----
 
 . Confirm the addon-env config values are correct:
@@ -208,7 +208,7 @@ minishift config get addon-env
 ----
 minishift stop
 minishift delete
-minishift start --openshift-version 3.9.0 --service-catalog
+minishift start --openshift-version v3.9.0 --service-catalog
 ----
 
 [[errors-when-stopping]]
