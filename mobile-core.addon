@@ -1,6 +1,6 @@
 # Name: minishift-mobilecore-addon                                                                          
 # Description: Allows authenticated users to run images under a non pre-allocated UID   
-# Var-Defaults: CONTAINER_REPO_USERNAME=USERNAME, CONTAINER_REPO_PASSWORD=PASSWORD, CONTAINER_REPO_ORG=aerogearcatalog, VER=v9.3.0, CORE_REPO=aerogear, CORE_BRANCH=master, CONSOLE_REPO=aerogear, CONSOLE_BRANCH=master
+# Var-Defaults: CONTAINER_REPO_USERNAME=USERNAME, CONTAINER_REPO_PASSWORD=PASSWORD, CONTAINER_REPO_ORG=aerogearcatalog, CORE_REPO=aerogear, CORE_BRANCH=master, CONSOLE_IMAGE=openshift/origin-web-console:v3.9.0
 # OpenShift-Version: >=3.9.0
 
 echo Installing oc client in vm
@@ -13,6 +13,7 @@ ssh tar -xf openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz && s
 ssh mkdir ~/.kube
 ssh cp /var/lib/minishift/openshift.local.config/master/admin.kubeconfig ~/.kube/config
 ssh oc login -u system:admin
+ssh oc adm policy add-cluster-role-to-user cluster-admin developer
 
 echo Installing mobile-client CRD: repo=#{CORE_REPO} branch=#{CORE_BRANCH}
 echo
@@ -26,7 +27,12 @@ echo Installing Ansible Service Broker: repo=#{CORE_REPO},branch=#{CORE_BRANCH},
 echo
 ssh curl -s -O -J -L https://raw.githubusercontent.com/#{CORE_REPO}/mobile-core/#{CORE_BRANCH}~/installer/roles/ansible-service-broker-setup/files/provision-ansible-service-broker.sh
 ssh chmod +x ./provision-ansible-service-broker.sh && ./provision-ansible-service-broker.sh '#{CONTAINER_REPO_USERNAME}' '#{CONTAINER_REPO_PASSWORD}' '#{CONTAINER_REPO_ORG}' true latest #{ip} nip.io ansible-service-broker
-ssh while [ $(oc get pods -n ansible-service-broker | grep "asb-" | grep -v "deploy" | grep "Running" | wc -l) -eq 0 ]; do sleep 10; done
+ssh while [ $(oc get pods -n ansible-service-broker | grep "asb-" | grep -v "deploy" | grep "Running" | wc -l) -eq 0 ]; do sleep 2; done
+
+echo Deploying web console image: #{CONSOLE_IMAGE}
+echo
+oc patch deployment webconsole -n openshift-web-console -p '{"spec": {"template": {"spec": {"containers": [{"name": "webconsole", "image": "#{CONSOLE_IMAGE}"}]}}}}'
+ssh while [ $(oc get pods -n openshift-web-console | grep "webconsole" | grep -v "deploy" | grep "Running" | wc -l) -eq 0 ]; do sleep 2; done
 
 echo Mobile Core successfully enabled
 echo
