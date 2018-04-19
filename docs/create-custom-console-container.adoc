@@ -1,0 +1,25 @@
+:org: AeroGear
+//source: https://github.com/aerogear/minishift-mobilecore-addon/blob/master/README.md
+
+
+[[creating-custom-console-container]]
+= Creating Custom Console Container
+
+== Requirements
+```sh
+go get github.com/openshift/origin-web-console-server
+```
+
+== Steps
+First of all, in the origin-web-console repo, check out the code you wish to build an image for, and perform the link:https://github.com/openshift/origin-web-console#production-builds[required steps] to create an upto date `dist` directory.
+
+In the origin-web-console-server repo, run:
+```sh
+CONSOLE_REPO_PATH=path/to/origin-web-console make vendor-console
+make clean build
+OS_BUILD_ENV_PRESERVE=_output/local/bin hack/env make build-images
+docker tag openshift/origin-web-console:latest <YOUR_TAG_FOR_THIS_IMAGE>
+docker push <YOUR_TAG_FOR_THIS_IMAGE>
+```
+
+Now you are ready to start Minishift with the custom container

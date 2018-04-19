@@ -61,6 +61,7 @@ Other options include:
 * CONTAINER_REPO_ORG: defaults to 'aerogearcatalog', specifies where to search for service catalog items.
 * CORE_REPO: defaults to 'aerogear', specifies the organziation or user in github to install the mobile-core component, that is, https://github.com/<CORE_REPO>/mobile-core.git.
 * CORE_BRANCH defaults to 'master', specifies the branch in the the CORE_REPO to install.
+* CONSOLE_IMAGE defaults to 'openshift/origin-web-console:v3.9.0', change this to specify a particular image to use for running the console.
 
 . Configure Minishift resources
 +
@@ -171,7 +172,7 @@ oc login -u system:admin
 oc get pods -n ansible-service-broker
 ----
 +
-If the asb pos is running correctly, you see something similar to the following:
+If the asb pod is running correctly, you see something similar to the following:
 +
 [source,bash]
 ----

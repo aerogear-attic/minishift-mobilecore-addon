@@ -31,7 +31,7 @@ ssh while [ $(oc get pods -n ansible-service-broker | grep "asb-" | grep -v "dep
 
 echo Deploying web console image: #{CONSOLE_IMAGE}
 echo
-oc patch deployment webconsole -n openshift-web-console -p '{"spec": {"template": {"spec": {"containers": [{"name": "webconsole", "image": "#{CONSOLE_IMAGE}"}]}}}}'
+ssh if [ '#{CONSOLE_IMAGE}' != 'openshift/origin-web-console:v3.9.0' ]; then oc patch deployment webconsole -n openshift-web-console -p '{"spec": {"template": {"spec": {"containers": [{"name": "webconsole", "image": "#{CONSOLE_IMAGE}"}]}}}}'; fi
 ssh while [ $(oc get pods -n openshift-web-console | grep "webconsole" | grep -v "deploy" | grep "Running" | wc -l) -eq 0 ]; do sleep 2; done
 
 echo Mobile Core successfully enabled
