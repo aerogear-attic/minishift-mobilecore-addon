@@ -3,7 +3,7 @@
 
 
 [[setting-up-minishift]]
-= Setting up AeroGear Mobile onMinishift
+= Setting up AeroGear Mobile on Minishift
 
 
 [[Before-Installation]]
