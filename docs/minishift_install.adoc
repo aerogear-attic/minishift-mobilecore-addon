@@ -48,10 +48,12 @@ NOTE: On subsequent installs, make sure to update the `minishift-mobilecore-addo
 
 NOTE: You may want to install the admin user addon for minishift to give
 you an admin user to login in with Enable the admin-user addons by default (or apply it later): 
-`minishift addons enable admin-user`
+
 
 ```
 minishift addons enable admin-user
+
+```
 
 . Set the following environment variables:
 +
