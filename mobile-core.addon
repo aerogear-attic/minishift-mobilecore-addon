@@ -1,6 +1,6 @@
 # Name: minishift-mobilecore-addon                                                                          
 # Description: Allows authenticated users to run images under a non pre-allocated UID   
-# Var-Defaults: CONTAINER_REPO_USERNAME=USERNAME, CONTAINER_REPO_PASSWORD=PASSWORD, CONTAINER_REPO_ORG=aerogearcatalog, CORE_REPO=aerogear, CORE_BRANCH=master, CONSOLE_IMAGE=openshift/origin-web-console:v3.9.0
+# Var-Defaults: CONTAINER_REPO_USERNAME=USERNAME, CONTAINER_REPO_PASSWORD=PASSWORD, CONTAINER_REPO_ORG=aerogearcatalog, CORE_REPO=aerogear, CORE_BRANCH=master, CONSOLE_IMAGE=aerogear/origin-web-console:latest
 # OpenShift-Version: >=3.9.0
 
 echo Installing oc client in vm
