@@ -11,24 +11,16 @@
 
 . link:https://docs.openshift.org/latest/minishift/getting-started/installing.html[Install Minishift]
 +
-Check Minishift version is at least 1.11.0:
+Check Minishift version is at least 1.16.1:
 +
 [source,bash]
 ----
 $ minishift version
-minishift v1.11.0+4459917
+minishift  v1.16.1+d9a86c9
 ----
 
 . link:https://docs.openshift.org/latest/cli_reference/get_started_cli.html#installing-the-cli[Install OC]
 
-. Enable Minishift experimental addons:
-+
-[source,bash]
-----
-export MINISHIFT_ENABLE_EXPERIMENTAL=y
-----
-+
-NOTE: If this variable is not set, you might be see errors similar to `Error: unknown flag: --service-catalog`.
 
 [[Installation]]
 == Installation
@@ -99,7 +91,7 @@ minishift delete
 +
 [source,bash]
 ----
-minishift start --openshift-version v3.9.0 --service-catalog
+minishift start --openshift-version v3.9.0 --extra-clusterup-flags "--service-catalog"
 ----
 +
 If you did not enable the addon, you need to apply it manually:
