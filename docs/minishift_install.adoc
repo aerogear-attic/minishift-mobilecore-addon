@@ -44,6 +44,7 @@ you an admin user to login in with Enable the admin-user addons by default (or a
 
 ```
 minishift addons enable admin-user
+```
 
 . Set the following environment variables:
 +
