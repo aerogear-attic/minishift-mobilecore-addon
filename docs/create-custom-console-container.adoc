@@ -9,6 +9,11 @@
 ```sh
 go get github.com/openshift/origin-web-console-server
 ```
+This should install the origin-web-console-server repo at:
+
+```sh
+$GOPATH/src/github.com/origin/openshift-web-console-server
+```
 
 == Steps
 First of all, in the origin-web-console repo, check out the code you wish to build an image for, and perform the link:https://github.com/openshift/origin-web-console#production-builds[required steps] to create an upto date `dist` directory.
