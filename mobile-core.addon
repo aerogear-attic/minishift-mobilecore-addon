@@ -20,7 +20,7 @@ echo
 oc login -u system:admin
 oc adm policy add-cluster-role-to-group system:openshift:templateservicebroker-client system:unauthenticated system:authenticated
 oc create -f https://raw.githubusercontent.com/#{CORE_REPO}/mobile-core/#{CORE_BRANCH}/installer/roles/create-mobile-client-crd/files/mobile-client-crd.yaml
-oc create clusterrole mobileclient-admin --verb=create,delete,get,list,update,watch --resource=mobileclients
+oc create clusterrole mobileclient-admin --verb=create,delete,get,list,patch,update,watch --resource=mobileclients
 oc adm policy add-cluster-role-to-group mobileclient-admin system:authenticated
 
 echo Installing Ansible Service Broker: repo=#{CORE_REPO},branch=#{CORE_BRANCH},container registry organisation=#{CONTAINER_REPO_ORG},container registry username=#{CONTAINER_REPO_USERNAME}
