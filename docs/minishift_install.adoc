@@ -21,6 +21,8 @@ minishift  v1.16.1+d9a86c9
 
 . link:https://docs.openshift.org/latest/cli_reference/get_started_cli.html#installing-the-cli[Install OC]
 
+> Note: Make sure you have setup proper virtualization environment: 
+https://docs.openshift.org/latest/minishift/getting-started/setting-up-virtualization-environment.html#setting-up-xhyve-driver
 
 [[Installation]]
 == Installation
@@ -50,6 +52,7 @@ minishift addons enable admin-user
 +
 [source,bash]
 ----
+export MINISHIFT_ENABLE_EXPERIMENTAL=y 
 export CONTAINER_REPO_USERNAME=<docker hub username>
 export CONTAINER_REPO_PASSWORD=<docker hub password>
 ----
