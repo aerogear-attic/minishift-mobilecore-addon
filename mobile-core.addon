@@ -10,7 +10,7 @@ ssh tce-load -wi coreutils.tcz
 ssh sudo chmod -R a+rwx /var/lib/minishift/openshift.local.config
 ssh curl -s -O -J -L https://github.com/openshift/origin/releases/download/v3.9.0/openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz
 ssh tar -xf openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz && sudo cp openshift-origin-client-tools-v3.9.0-191fece-linux-64bit/oc /usr/bin/oc
-ssh mkdir ~/.kube
+ssh mkdir -p ~/.kube
 ssh cp /var/lib/minishift/openshift.local.config/master/admin.kubeconfig ~/.kube/config
 ssh oc login -u system:admin
 ssh oc adm policy add-cluster-role-to-user cluster-admin developer
