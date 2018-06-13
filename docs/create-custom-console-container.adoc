@@ -7,8 +7,16 @@
 
 == Requirements
 ```sh
+go get github.com/openshift/origin-web-common
+go get github.com/openshift/origin-web-catalog
+go get github.com/openshift/origin-web-console
+```
+and add the aerogear upstream to each of these repos
+
+```
 go get github.com/openshift/origin-web-console-server
 ```
+
 This should install the origin-web-console-server repo at:
 
 ```sh
@@ -16,7 +24,32 @@ $GOPATH/src/github.com/origin/openshift-web-console-server
 ```
 
 == Steps
-First of all, in the origin-web-console repo, check out the code you wish to build an image for, and perform the link:https://github.com/openshift/origin-web-console#production-builds[required steps] to create an upto date `dist` directory.
+in the origin-web-common repo run:
+```
+git checkout aerogear-mcp
+git pull
+grunt build
+bower link
+```
+
+in the origin-web-catalog repo run:
+```
+git checkout aerogear-mcp
+git pull
+npm run-build
+bower link
+```
+
+in the origin-web-console repo run:
+```
+./hack/clean-dep.sh
+git checkour aerogear-mcp
+git pull
+./hack/install-deps.sh
+bower link origin-web-catalog
+bower link origin-web-common
+grunt build
+```
 
 In the origin-web-console-server repo, run:
 ```sh
