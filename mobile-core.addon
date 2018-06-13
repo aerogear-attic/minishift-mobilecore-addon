@@ -27,7 +27,7 @@ oc adm policy add-cluster-role-to-group mobileclient-admin system:authenticated
 echo Installing Ansible Service Broker: repo=#{CORE_REPO},branch=#{CORE_BRANCH},container registry organisation=#{CONTAINER_REPO_ORG},container registry username=#{CONTAINER_REPO_USERNAME}
 echo
 ssh curl -s -O -J -L https://raw.githubusercontent.com/#{CORE_REPO}/mobile-core/#{CORE_BRANCH}~/installer/roles/ansible-service-broker-setup/files/provision-ansible-service-broker.sh
-ssh chmod +x ./provision-ansible-service-broker.sh && ./provision-ansible-service-broker.sh '#{CONTAINER_REPO_USERNAME}' '#{CONTAINER_REPO_PASSWORD}' '#{CONTAINER_REPO_ORG}' true latest #{ip} nip.io ansible-service-broker
+ssh chmod +x ./provision-ansible-service-broker.sh && ./provision-ansible-service-broker.sh '#{CONTAINER_REPO_USERNAME}' '#{CONTAINER_REPO_PASSWORD}' '#{CONTAINER_REPO_ORG}' true latest #{ip} nip.io ansible-service-broker Always
 ssh while [ $(oc get pods -n ansible-service-broker | grep "asb-" | grep -v "deploy" | grep "Running" | wc -l) -eq 0 ]; do sleep 2; done
 
 echo Deploying web console image: #{CONSOLE_IMAGE}
