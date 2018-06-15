@@ -30,7 +30,7 @@ go get github.com/openshift/origin-web-console-server
 This should install the origin-web-console-server repo at:
 
 ```sh
-$GOPATH/src/github.com/origin/openshift-web-console-server
+$GOPATH/src/github.com/openshift/origin-web-console-server
 ```
 
 == Steps
