@@ -5,8 +5,6 @@
 
 echo Installing oc client in vm
 echo
-ssh tce-load -wi bash.tcz
-ssh tce-load -wi coreutils.tcz
 ssh sudo chmod -R a+rwx /var/lib/minishift/openshift.local.config
 ssh rm -f /tmp/openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz
 ssh cd /tmp && curl -s -O -J -L https://github.com/openshift/origin/releases/download/v3.9.0/openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz
